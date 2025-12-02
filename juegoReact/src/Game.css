@@ -1,0 +1,62 @@
+body {
+  background: #f5f6fa url('./assets/fondo.png') no-repeat center center fixed;
+  background-size: cover;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.game-container {
+  max-width: 700px;
+  margin: 40px auto;
+  background: rgba(255,255,255,0.50);
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  padding: 32px 24px;
+}
+
+h1, .result {
+  border-radius: 8px;
+  padding: 8px 0;
+}
+
+.characters {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 24px;
+}
+
+.characters img {
+  width: 180px;
+  height: auto;
+  display: block;
+  margin: 0 auto 8px auto;
+}
+
+.lives-disp {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.lives-disp img {
+  width: 28px;
+  height: 28px;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.result {
+  text-align: center;
+  font-size: 1.2em;
+  color: #0984e3;
+  min-height: 32px;
+  margin-top: 16px;
+}

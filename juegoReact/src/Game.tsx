@@ -66,6 +66,7 @@ const handleFight = () => {   //Se ejecuta al hacer clic en el botón "¡Pelear!
     setMonsterRandom(null);
     setHeroTotal(null);
     setMonsterTotal(null);
+    setIsResolved(false); //reinicio el estado de resolución
 };
 
 //***Función para resolver la Pelea ***
@@ -97,7 +98,7 @@ const handleResolution = () => { //Se ejecuta al hacer clic en el botón "¡Reso
     if(heroValue + heroRandom > monsterValue + monsterRandom) {
         updatedMonster.health -= 1; // Restamos vida de monster
         roundResult = `${hero.name} gana la ronda`;  //Formateamos texto y extraemos de hero su nombre como si fuese un getter.  
-    }else if (monsterTotal != null && heroTotal != null && monsterTotal > heroTotal) { //gana monster
+    }else if (heroValue + heroRandom < monsterValue + monsterRandom) { //gana monster
         updatedHero.health -= 1;
         roundResult = `${monster.name} gana la ronda`;
     }else{ //empate
@@ -109,7 +110,8 @@ const handleResolution = () => { //Se ejecuta al hacer clic en el botón "¡Reso
     setMonster(updatedMonster);
     setResult(roundResult);
     setIsResolved(true)
-
+    setIsFighting(false);
+     
     //Si alguna vida llega a 0   == compara el valor de la varibale y === también el tipo 
     if(updatedHero.health === 0 ||updatedMonster.health === 0) {
         setGameOver(true); //se acabó la partida
