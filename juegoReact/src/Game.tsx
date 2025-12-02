@@ -62,6 +62,10 @@ const handleFight = () => {   //Se ejecuta al hacer clic en el botón "¡Pelear!
     setSelectedCharacteristic(characteristics[randomIndex]); //Actualizo el estado selectedCharacteristic con la característica seleccionada aleatoriamente
     setIsFighting(true); //activo el estado isFighting para indicar que la pelea está en curso y manejar el booleano 
     setResult(''); //limpio el resultado anterior
+    setHeroRandom(null); //reinicio los valores aleatorios y totales
+    setMonsterRandom(null);
+    setHeroTotal(null);
+    setMonsterTotal(null);
 };
 
 //***Función para resolver la Pelea ***
@@ -78,8 +82,8 @@ const handleResolution = () => { //Se ejecuta al hacer clic en el botón "¡Reso
 
     setHeroRandom(heroRandom);
     setMonsterRandom(monsterRandom);
-    setHeroTotal(heroValue);
-    setMonsterTotal(monsterValue);
+    setHeroTotal(heroValue + heroRandom);
+    setMonsterTotal(monsterValue + monsterRandom);
 
     
     let roundResult = '';
@@ -90,10 +94,10 @@ const handleResolution = () => { //Se ejecuta al hacer clic en el botón "¡Reso
     
 
     //Gana Héroe
-    if(heroValue > monsterValue){
+    if(heroValue + heroRandom > monsterValue + monsterRandom) {
         updatedMonster.health -= 1; // Restamos vida de monster
         roundResult = `${hero.name} gana la ronda`;  //Formateamos texto y extraemos de hero su nombre como si fuese un getter.  
-    }else if (monsterValue > heroValue) { //gana monster
+    }else if (monsterTotal != null && heroTotal != null && monsterTotal > heroTotal) { //gana monster
         updatedHero.health -= 1;
         roundResult = `${monster.name} gana la ronda`;
     }else{ //empate
