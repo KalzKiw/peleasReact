@@ -2,19 +2,23 @@
 import React from 'react';
 
 type LivesDispProps = {
-    lives: number; // Número de vidas restantes
-    img: string; // Imagen de las vidas (corazones)
+    health: number; // Número de vidas restantes
+    heartImage: string; // Imagen de las vidas (corazones)
 };
-const LivesDisp: React.FC<LivesDispProps> = ({ lives, img }) => {
+
+const LivesDisp: React.FC<LivesDispProps> = ({ health, heartImage }) => {
     return (
         <div className="lives-disp">
-            Vidas restantes: {lives}
-            <div className="hearts">
-                {Array.from({ length: lives }).map((_, index) => (
-                    <img key={index} src={img} alt="Vida" className="heart-image" />
-                ))}
-            </div>
+            {Array.from({ length: health }).map((_, i) => (
+                <img
+                    key={i}
+                    src={heartImage}
+                    alt="corazón"
+                    style={{ width: 24, height: 24, marginRight: 4 }}
+                />
+            ))}
         </div>
     );
 };
+
 export default LivesDisp;
