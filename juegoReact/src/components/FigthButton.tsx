@@ -7,8 +7,8 @@ type FigthButtonProps = {
 
 const FigthButton: React.FC<FigthButtonProps> = ({ onClick, disabled }) => {
     return (
-        <button className="figth-button" onClick={onClick} disabled={disabled}>
-            ¡Pelear!
+        <button className="game-button" onClick={onClick} disabled={disabled}>
+            <div><span>¡Pelear!</span></div>
         </button>
     );
 };

@@ -8,6 +8,8 @@ import './Game.css'; //estilo css
 import heroImage from './assets/hero.png';
 import monsterImage from './assets/monster.png';
 import heartImage from './assets/heart.png';
+import magoImage from './assets/mago.png';
+import esqueletoImage from './assets/esqueleto.png';
 
 //declaración de atributos de mis personajes, usando typescript
 type Character = {
@@ -15,7 +17,7 @@ type Character = {
     image: string;
     fuerza: number;
     destreza: number;
-    suerte: number;
+    magia: number;
     health: number;
 };
 
@@ -24,7 +26,7 @@ const initialHero: Character = {
     image: heroImage,
     fuerza: 10,
     destreza: 8,
-    suerte: 6,
+    magia: 6,
     health: 3,
 };
 const initialMonster: Character = {
@@ -32,7 +34,7 @@ const initialMonster: Character = {
     image: monsterImage,
     fuerza: 9,
     destreza: 7,
-    suerte: 5,
+    magia: 5,
     health: 3,
 };
 const Game: React.FC = () => {
@@ -44,10 +46,10 @@ const [monster, setMonster] = useState<Character>(initialMonster);
 const [isFighting, setIsFighting] = useState<boolean>(false);
 //estados para manejar las vidas
 const [isResolved, setIsResolved] = useState<boolean>(false);
-const [selectedCharacteristic, setSelectedCharacteristic] = useState<keyof Pick<Character, 'fuerza' | 'destreza' | 'suerte'> | null>(null);
+const [selectedCharacteristic, setSelectedCharacteristic] = useState<keyof Pick<Character, 'fuerza' | 'destreza' | 'magia'> | null>(null);
 const [result, setResult] = useState<string>('');
 const [gameOver, setGameOver] = useState<boolean>(false);
-const characteristics: Array<keyof Pick<Character, 'fuerza' | 'destreza' | 'suerte'>> = ['fuerza', 'destreza', 'suerte'];
+const characteristics: Array<keyof Pick<Character, 'fuerza' | 'destreza' | 'magia'>> = ['fuerza', 'destreza', 'magia'];
 
 //Variables para almacenar los valores aleatorios y totales de cada personaje en la pelea
 const [heroRandom, setHeroRandom] = useState<number | null>(null);
@@ -100,7 +102,7 @@ const handleResolution = () => { //Se ejecuta al hacer clic en el botón "¡Reso
         roundResult = `${hero.name} gana la ronda`;  //Formateamos texto y extraemos de hero su nombre como si fuese un getter.  
     }else if (heroValue + heroRandom < monsterValue + monsterRandom) { //gana monster
         updatedHero.health -= 1;
-        roundResult = `${monster.name} gana la ronda`;
+        roundResult = `${monster.name} gana la ronda`; 
     }else{ //empate
         roundResult = `¡Empate!`; 
     }
@@ -109,13 +111,13 @@ const handleResolution = () => { //Se ejecuta al hacer clic en el botón "¡Reso
     setHero(updatedHero);  
     setMonster(updatedMonster);
     setResult(roundResult);
-    setIsResolved(true)
+    setIsResolved(true) ; 
     setIsFighting(false);
      
     //Si alguna vida llega a 0   == compara el valor de la varibale y === también el tipo 
     if(updatedHero.health === 0 ||updatedMonster.health === 0) {
         setGameOver(true); //se acabó la partida
-        setResult(
+        setResult( //ternario  
             updatedHero.health === 0
             ? `${monster.name} gana el juego`
             : `${hero.name} gana el juego`
@@ -125,7 +127,7 @@ const handleResolution = () => { //Se ejecuta al hacer clic en el botón "¡Reso
 //---RENDERIZADO---
     return(
         <div className='game-container press-start-2p-regular'>
-            <h1>
+            <h1 className='fight-title'>
                 Lucha por:{'  '}
                  {selectedCharacteristic ? selectedCharacteristic.toUpperCase() : '---'} {/*Titulo, lo que está dentro de {} es lo que se renderiza, aqui la caracteristica*/}
             </h1>
@@ -135,30 +137,32 @@ const handleResolution = () => { //Se ejecuta al hacer clic en el botón "¡Reso
                     image={hero.image}
                     fuerza={hero.fuerza}
                     destreza={hero.destreza}
-                    suerte={hero.suerte}
+                    magia={hero.magia}
                     selectedCharacteristic={selectedCharacteristic}
                     random={heroRandom}
                     total={heroTotal}
                     health={hero.health}
                     heartImage={heartImage}
+                    isHero={true}
                 />
                 <CharacterCard
                     name={monster.name}
                     image={monster.image}
                     fuerza={monster.fuerza}
                     destreza={monster.destreza}
-                    suerte={monster.suerte}
+                    magia={monster.magia}
                     selectedCharacteristic={selectedCharacteristic}
                     random={monsterRandom}
                     total={monsterTotal}
                     health={monster.health}
                     heartImage={heartImage}
+                    mirror={true}
                 />
             </div>
             <div className='actions'>
-                <FigthButton onClick={handleFight} disabled={isFighting || gameOver} />
-                <ResolutionButton onClick={handleResolution} disabled={!isFighting || isResolved ||gameOver} />
-                {gameOver && <button onClick={() => {
+                <FigthButton onClick={handleFight} disabled={isFighting || gameOver} />  {/* El botón de pelear se desactiva si ya se está peleando o si el juego terminó */}
+                <ResolutionButton onClick={handleResolution} disabled={!isFighting || isResolved ||gameOver} /> {/* El botón de resolver se desactiva si no se está peleando, si ya se resolvió o si el juego terminó */}
+                {gameOver && <button className="game-button" onClick={() => { //botón para reiniciar el juego
                     setHero(initialHero);
                     setMonster(initialMonster);
                     setSelectedCharacteristic(null);
@@ -166,9 +170,11 @@ const handleResolution = () => { //Se ejecuta al hacer clic en el botón "¡Reso
                     setGameOver(false);
                     setIsFighting(false);
                     setIsResolved(false);
-                }}>¡COMENZAR NUEVA PELEA!</button>}
+                }}><div><span>¡NUEVA PELEA!</span></div></button>}
             </div>
             <div className='result-bottom'>{result}</div>
+            <img src={magoImage} alt="Mago" className="landscape-mago" />
+            <img src={esqueletoImage} alt="Esqueleto" className="landscape-esqueleto" />
         </div>
     );
 };

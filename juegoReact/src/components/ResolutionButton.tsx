@@ -10,11 +10,11 @@ const ResolutionButton: React.FC<ResolutionButtonProps> = ({ onClick, disabled }
     return (
         <button
             type="button"
-            className="resolution-button"
+            className="game-button"
             onClick={onClick}
             disabled={disabled}
         >
-            ¡Resolver!
+            <div><span>¡Resolver!</span></div>
         </button>
     );
 };

@@ -3,7 +3,7 @@ import React from 'react';
 
 type LivesDispProps = {
     health: number; // Número de vidas restantes
-    heartImage: string; // Imagen de las vidas (corazones)
+    heartImage: string; // Imagen de lis corazones
 };
 
 const LivesDisp: React.FC<LivesDispProps> = ({ health, heartImage }) => {
@@ -14,7 +14,7 @@ const LivesDisp: React.FC<LivesDispProps> = ({ health, heartImage }) => {
                     key={i}
                     src={heartImage}
                     alt="corazón"
-                    style={{ width: 24, height: 24, marginRight: 4 }}
+                    style={{ width: 50, height: 50, marginRight: 4 }}
                 />
             ))}
         </div>
