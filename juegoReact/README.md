@@ -7,3 +7,6 @@ Si tengo tiempo quiero añadir un:
   -Música y Efectos de sonido.
   -Quizás usar una librería o algo para añadir una pequeña animación tipo Pokemón
   -...
+
+
+  # DOC

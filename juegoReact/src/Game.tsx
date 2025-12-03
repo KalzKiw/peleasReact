@@ -124,14 +124,13 @@ const handleResolution = () => { //Se ejecuta al hacer clic en el botón "¡Reso
 };
 //---RENDERIZADO---
     return(
-        <div className='game-container'>
+        <div className='game-container press-start-2p-regular'>
             <h1>
                 Lucha por:{'  '}
                  {selectedCharacteristic ? selectedCharacteristic.toUpperCase() : '---'} {/*Titulo, lo que está dentro de {} es lo que se renderiza, aqui la caracteristica*/}
             </h1>
-            <div className='characters'>
-                <div> {/*Rendereizado del Hero*/}
-                    <CharacterCard
+            <div className='characters fullscreen-characters'>
+                <CharacterCard
                     name={hero.name}
                     image={hero.image}
                     fuerza={hero.fuerza}
@@ -140,22 +139,21 @@ const handleResolution = () => { //Se ejecuta al hacer clic en el botón "¡Reso
                     selectedCharacteristic={selectedCharacteristic}
                     random={heroRandom}
                     total={heroTotal}
-                    />
-                    <LivesDisp health={hero.health} heartImage={heartImage} />
-                </div>
-                <div> {/*Rendereizado del Monster*/}
-                    <CharacterCard
-                        name={monster.name}
-                        image={monster.image}
-                        fuerza={monster.fuerza}
-                        destreza={monster.destreza}
-                        suerte={monster.suerte}
-                        selectedCharacteristic={selectedCharacteristic}
-                        random={monsterRandom}
-                        total={monsterTotal}
-                    />
-                    <LivesDisp health={monster.health} heartImage={heartImage} />
-                </div>
+                    health={hero.health}
+                    heartImage={heartImage}
+                />
+                <CharacterCard
+                    name={monster.name}
+                    image={monster.image}
+                    fuerza={monster.fuerza}
+                    destreza={monster.destreza}
+                    suerte={monster.suerte}
+                    selectedCharacteristic={selectedCharacteristic}
+                    random={monsterRandom}
+                    total={monsterTotal}
+                    health={monster.health}
+                    heartImage={heartImage}
+                />
             </div>
             <div className='actions'>
                 <FigthButton onClick={handleFight} disabled={isFighting || gameOver} />
@@ -170,7 +168,7 @@ const handleResolution = () => { //Se ejecuta al hacer clic en el botón "¡Reso
                     setIsResolved(false);
                 }}>¡COMENZAR NUEVA PELEA!</button>}
             </div>
-            <div className='result'>{result}</div>
+            <div className='result-bottom'>{result}</div>
         </div>
     );
 };
