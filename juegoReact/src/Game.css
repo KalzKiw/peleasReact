@@ -18,7 +18,7 @@ body {
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
-  font-size: 4em;
+  font-size: 2em;
   margin: 0;
   letter-spacing: 4px;
   z-index: 10;
@@ -159,9 +159,9 @@ body {
   justify-content: center;
   gap: 32px;
   margin: 0 auto;
-  position: absolute;
-  left: 50%;
-  top: 650px;
+    position: fixed;
+    left: 50%;
+    bottom: 12px;
   transform: translateX(-50%);
   z-index: 5;
 }
@@ -286,9 +286,9 @@ body {
   position: absolute;
   bottom: 150px;
   left: 50%;
-  transform: translateX(-50%);
-  width: 900px;
-  max-width: 90vw;
+    transform: translateX(-50%);
+    text-align: center;
+    font-size: 1.3em;
   height: 200px;
   display: flex;
   align-items: center;
